@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en" class="h-100">
 
-<head>
-	<title>Weather</title>
-	<link rel="stylesheet" href="css/styles.css" />
-	<link rel="icon" href="images/weather.png" />
-</head>
+{{>header}}
 
-<body>
-	<div class="main-content">
-		{{>header}}
-		<p>Use this page to get your weather!</p>
+<body class="d-flex flex-column h-100">
+	{{>navbar}}
 
-		<form>
-			<input placeholder="Location" />
-			<button>Search</button>
-		</form>
+	<main class="flex-shrink-0">
+		<div class="container">
+			<div class="bg-light p-5 rounded">
+				<h1>Use this page to get your weather!</h1>
+				<div class="row">
+					<form>
+						<div class="mb-3">
+							<label for="locationInput" class="form-label">Location</label>
+							<input type="text" class="form-control" id="locationInput" aria-describedby="locationHelp">
+							<div id="locationHelp" class="form-text">Add here the location for which you need to get the weather.
+							</div>
+						</div>
 
-		<p id="message-1"></p>
-		<p id="message-2"></p>
-	</div>
+						<button type="submit" class="btn btn-primary">Search</button>
+					</form>
+				</div>
+
+				<div class="row mt-2">
+					<div class="mb-3" id="search-result"></div>
+				</div>
+			</div>
+		</div>
+	</main>
 
 	{{>footer}}
 	<script src="js/app.js"></script>

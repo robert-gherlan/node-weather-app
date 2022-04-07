@@ -1,24 +1,27 @@
 const weatherForm = document.querySelector('form')
 const searchInput = document.querySelector('input')
-const messageOne = document.querySelector('#message-1')
-const messageTwo = document.querySelector('#message-2')
+
+const searchResultElement = document.querySelector('#search-result')
 
 weatherForm.addEventListener('submit', event => {
   event.preventDefault()
 
-  messageOne.textContent = 'Loading...'
-  messageTwo.textContent = ''
+  alert('Loading...', 'warning')
 
   const location = searchInput.value
   fetch(`/weather?address=${encodeURIComponent(location)}`).then(response => {
     response.json().then(data => {
       if (data.error) {
-        messageOne.textContent = data.error
+        alert(data.error, 'danger')
       } else {
         const { temperature, wind_dir, pressure, humidity } = data
-        messageOne.textContent = `Temperature is ${temperature} and humidity is ${humidity}.`
-        messageTwo.textContent = `Pressure is ${pressure} and wind direction is ${wind_dir}.`
+        const message = `Temperature is ${temperature} and humidity is ${humidity}. Pressure is ${pressure} and wind direction is ${wind_dir}.`
+        alert(message, 'success')
       }
     })
   })
 })
+
+const alert = (message, type) => {
+  searchResultElement.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert">${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`
+}

@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="en" class="h-100">
 
-<head>
-	<link rel="stylesheet" href="/css/styles.css" />
-</head>
+{{>header}}
 
-<body>
-	<div class="main-content">
-		{{>header}}
-		<p>This site was created by Robert Gherlan. It uses data from <a
-				href="https://weatherstack.com/">weatherstack.com</a>.</p>
-		<img class="portrait" src="images/image.jpg" />
-	</div>
+<body class="d-flex flex-column h-100">
+	{{>navbar}}
+
+	<main class="flex-shrink-0">
+		<div class="container">
+			<div class="bg-light p-5 rounded">
+				<p>This site was created by {{name}}.</p>
+				<p>It uses data from <a href="https://weatherstack.com/">weatherstack.com</a>.</p>
+				<img class="portrait" src="images/image.jpg" />
+			</div>
+		</div>
+	</main>
+
 	{{>footer}}
 </body>
 

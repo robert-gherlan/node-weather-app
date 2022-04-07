@@ -5,6 +5,7 @@ const weatherstack = require('./utils/weatherstack')
 
 const app = express()
 const port = process.env.PORT || 3000
+const name = 'Robert Gherlan'
 
 const publicDirectoryPath = path.join(__dirname, '../public')
 const viewsPath = path.join(__dirname, '../templates/views')
@@ -22,21 +23,21 @@ app.use(express.static(publicDirectoryPath))
 app.get('/', (request, response) => {
   response.render('index', {
     title: 'Weather App',
-    name: 'Robert Gherlan'
+    name
   })
 })
 
 app.get('/about', (request, response) => {
   response.render('about', {
     title: 'About',
-    name: 'Robert Gherlan'
+    name
   })
 })
 
 app.get('/help', (request, response) => {
   response.render('help', {
     title: 'Help',
-    name: 'Robert Gherlan',
+    name,
     helpText: 'This is some helpful text.'
   })
 })
@@ -44,7 +45,7 @@ app.get('/help', (request, response) => {
 app.get('/help/*', (request, response) => {
   response.render('404', {
     title: '404',
-    name: 'Robert Gherlan',
+    name,
     errorMessage: 'Help article not found'
   })
 })
@@ -58,8 +59,13 @@ app.get('/weather', (request, response) => {
   }
 
   weatherstack(address, (error, data) => {
+    console.log(error, data)
     if (error) {
       return response.status(400).send({ error })
+    } else if (!data) {
+      return response.status(500).send({
+        error: 'Failed to retrieve data from external API.'
+      })
     }
 
     response.send(data)
@@ -69,7 +75,7 @@ app.get('/weather', (request, response) => {
 app.get('*', (request, response) => {
   response.render('404', {
     title: '404',
-    name: 'Robert Gherlan',
+    name,
     errorMessage: 'Page not found'
   })
 })
