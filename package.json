@@ -5,7 +5,7 @@
 	"main": "src/app.js",
 	"scripts": {
 		"start": "node src/app.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"dev": "nodemon src/app.js -e *"
 	},
 	"keywords": [],
 	"author": "",
@@ -14,5 +14,8 @@
 		"express": "^4.17.3",
 		"hbs": "^4.2.0",
 		"request": "^2.88.2"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.15"
 	}
 }
